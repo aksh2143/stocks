@@ -1,16 +1,14 @@
-package com.sky.stocks.controller;
+package com.sky.controller;
 
-import com.sky.stocks.entity.nse.ApplicationStaticData;
-import com.sky.stocks.entity.nse.Instrument;
-import com.sky.stocks.entity.nse.NSE;
-import com.sky.stocks.feign.FeignBuilder;
-import com.sky.stocks.feign.FeignClientNSENifty;
-import com.sky.stocks.service.DataPrepareService;
+import com.sky.service.DataPrepareService;
+import com.sky.entity.nse.ApplicationStaticData;
+import com.sky.entity.nse.Instrument;
+import com.sky.entity.nse.NSE;
+import com.sky.feign.FeignBuilder;
+import com.sky.feign.FeignClientNSENifty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 

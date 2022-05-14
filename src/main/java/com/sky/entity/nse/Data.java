@@ -1,4 +1,4 @@
-package com.sky.stocks.entity.nse;
+package com.sky.entity.nse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

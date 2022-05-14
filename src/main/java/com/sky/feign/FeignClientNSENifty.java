@@ -1,6 +1,6 @@
-package com.sky.stocks.feign;
+package com.sky.feign;
 
-import com.sky.stocks.entity.nse.NSE;
+import com.sky.entity.nse.NSE;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.sky.stocks.config;
+package com.sky.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.sky.stocks.feign;
+package com.sky.feign;
 
 import java.util.HashMap;
 import java.util.Map;

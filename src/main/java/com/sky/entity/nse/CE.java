@@ -1,4 +1,4 @@
-package com.sky.stocks.entity.nse;
+package com.sky.entity.nse;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 
 @Getter
 @Setter
-public class PE {
+public class CE {
     private static final DecimalFormat df = new DecimalFormat("0.0000");
 
     double strikePrice;
@@ -51,13 +51,13 @@ public class PE {
     double totOI;
 
     double totVol;
+
     public void setChange(double change) {
         change = Double.parseDouble(df.format(change));
         this.change = change;
     }
 
     double chips;
-
     double air;
     double distanceFromSpot;
 

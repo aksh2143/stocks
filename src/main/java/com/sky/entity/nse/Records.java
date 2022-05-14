@@ -1,4 +1,4 @@
-package com.sky.stocks.entity.nse;
+package com.sky.entity.nse;
 
 import lombok.Getter;
 import lombok.Setter;
