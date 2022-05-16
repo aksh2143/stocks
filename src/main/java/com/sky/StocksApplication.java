@@ -1,6 +1,7 @@
 package com.sky;
 
 import com.sky.entity.nse.ApplicationStaticData;
+import com.sky.feign.FeignBuilder;
 import com.sky.utils.URLS;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -38,6 +39,7 @@ public class StocksApplication {
                 }
             }
             ApplicationStaticData.fnoStockList = fnoList;
+            ApplicationStaticData.headersMap = FeignBuilder.builder();
 
         } catch (Exception e) {
             e.printStackTrace();
