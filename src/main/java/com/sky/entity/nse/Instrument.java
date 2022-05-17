@@ -16,5 +16,4 @@ public class Instrument {
     double currentStrike;
     String futureValue;
     OptionChain optionChain;
-    String country;
 }

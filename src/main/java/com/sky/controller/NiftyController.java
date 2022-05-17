@@ -73,13 +73,7 @@ public class NiftyController {
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date");
 
-        Instrument instrument = dataPrepareService.prepareInstrumentData(nse, 50, 200, false, expiryDate);
-        List<Strike> list = new ArrayList<>();
-        Strike s1 = Strike.builder().strikePrice(1200).build();
-        Strike s2 = Strike.builder().strikePrice(100).build();
-        list.add(s1);
-        list.add(s2);
-
+        Instrument instrument = dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate);
         model.addAttribute("instrument", instrument);
 
         return "viewemp";
