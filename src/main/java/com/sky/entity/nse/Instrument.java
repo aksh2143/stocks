@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,4 +16,5 @@ public class Instrument {
     double currentStrike;
     String futureValue;
     OptionChain optionChain;
+    String country;
 }

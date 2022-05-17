@@ -28,17 +28,17 @@ public class NiftyRestController {
     @GetMapping("/getexpirydates")
     public ResponseEntity<List<String>> getExpiryDates() throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
-        ApplicationStaticData.expiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
-        return ResponseEntity.ok(ApplicationStaticData.expiryDates);
+        ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
+        return ResponseEntity.ok(ApplicationStaticData.niftyExpiryDates);
     }
 
     @GetMapping("/getniftydata")
     public ResponseEntity<Instrument> getOptionChainAnalysis(@RequestParam("expiryDate") String expiryDate) throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
         System.out.println(nse);
-        ApplicationStaticData.expiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
+        ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
 
-        if (!ApplicationStaticData.expiryDates.contains(expiryDate))
+        if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date");
 
         return ResponseEntity.ok(dataPrepareService.prepareInstrumentData(nse, 50, 200, false, expiryDate));
