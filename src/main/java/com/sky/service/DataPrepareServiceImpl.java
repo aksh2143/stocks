@@ -54,6 +54,16 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             double cechips = cedistanceFromSpot;
             ce.setChips(cechips);
             ce.setAir(ceair);
+            if (ce.getStrikePrice() < currentStrike) {
+                ce.setItm(true);
+                ce.setPlace("ITM");
+            } else if (ce.getStrikePrice() == currentStrike) {
+                ce.setAtm(true);
+                ce.setPlace("ATM");
+            } else {
+                ce.setOtm(true);
+                ce.setPlace("OTM");
+            }
             strike.setCe(ce);
 
             PE pe = strike.getPe();
@@ -63,6 +73,16 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             double pechips = Math.abs(pedistanceFromSpot);
             pe.setChips(pechips);
             pe.setAir(peair);
+            if (pe.getStrikePrice() < currentStrike) {
+                pe.setOtm(true);
+                pe.setPlace("OTM");
+            } else if (ce.getStrikePrice() == currentStrike) {
+                pe.setAtm(true);
+                pe.setPlace("ATM");
+            } else {
+                ce.setItm(true);
+                pe.setPlace("ITM");
+            }
             strike.setPe(pe);
         }
 

@@ -51,15 +51,19 @@ public class PE {
     double totOI;
 
     double totVol;
+
     public void setChange(double change) {
         change = Double.parseDouble(df.format(change));
         this.change = change;
     }
 
     double chips;
-
     double air;
     double distanceFromSpot;
+    boolean isAtm;
+    boolean isOtm;
+    boolean isItm;
+    String place;
 
     public void setChips(double chips) {
         chips = Double.parseDouble(df.format(chips));

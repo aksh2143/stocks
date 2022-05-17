@@ -60,6 +60,10 @@ public class CE {
     double chips;
     double air;
     double distanceFromSpot;
+    boolean isAtm;
+    boolean isOtm;
+    boolean isItm;
+    String place;
 
     public void setChips(double chips) {
         chips = Double.parseDouble(df.format(chips));
