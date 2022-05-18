@@ -76,7 +76,7 @@ public class NiftyController {
         Instrument instrument = dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate);
         model.addAttribute("instrument", instrument);
 
-        return "viewemp";
+        return "viewopt";
     }
 
 

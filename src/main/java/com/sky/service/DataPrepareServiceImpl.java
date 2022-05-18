@@ -51,6 +51,8 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             double cedistanceFromSpot = currentStrike - ce.getStrikePrice();
             if (cedistanceFromSpot <= 0) cedistanceFromSpot = 0;
             double ceair = ce.getLastPrice() - cedistanceFromSpot;
+            double ceairP = (ceair * 100) / ce.getLastPrice();
+            ce.setAirPercent(ceairP);
             double cechips = cedistanceFromSpot;
             ce.setChips(cechips);
             ce.setAir(ceair);
@@ -71,6 +73,8 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             if (pedistanceFromSpot > 0) pedistanceFromSpot = 0;
             double peair = pe.getLastPrice() + pedistanceFromSpot;
             double pechips = Math.abs(pedistanceFromSpot);
+            double peairP = (peair * 100) / pe.getLastPrice();
+            pe.setAirPercent(peairP);
             pe.setChips(pechips);
             pe.setAir(peair);
             if (pe.getStrikePrice() < currentStrike) {

@@ -10,6 +10,8 @@ import java.text.DecimalFormat;
 public class PE {
     private static final DecimalFormat df = new DecimalFormat("0.0000");
 
+    private static final DecimalFormat df2 = new DecimalFormat("0");
+
     double strikePrice;
 
     String expiryDate;
@@ -58,7 +60,9 @@ public class PE {
     }
 
     double chips;
+    double chipsPercent;
     double air;
+    double airPercent;
     double distanceFromSpot;
     boolean isAtm;
     boolean isOtm;
@@ -73,5 +77,11 @@ public class PE {
     public void setAir(double air) {
         air = Double.parseDouble(df.format(air));
         this.air = air;
+    }
+
+    public void setAirPercent(double airPercent) {
+        if (Double.isFinite(airPercent))
+            airPercent = Double.parseDouble(df2.format(airPercent));
+        this.airPercent = airPercent;
     }
 }
