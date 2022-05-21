@@ -6,7 +6,6 @@ import com.sky.entity.nse.NSE;
 import com.sky.feign.FeignBuilder;
 import com.sky.feign.FeignClientNSENifty;
 import com.sky.service.DataPrepareService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
-@Api
-@RestController("/rest")
+@RestController()
 public class NiftyRestController {
 
     @Autowired
