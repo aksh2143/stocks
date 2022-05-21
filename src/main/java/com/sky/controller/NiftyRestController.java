@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 public class NiftyRestController {
@@ -23,14 +24,14 @@ public class NiftyRestController {
     @Autowired
     DataPrepareService dataPrepareService;
 
-    @GetMapping("/getexpirydates")
-    public ResponseEntity<List<String>> getExpiryDates() throws Exception {
+    @GetMapping("/nifty/getniftyexpirydates")
+    public ResponseEntity<Map<String, String>> getExpiryDates() throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
-        ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
-        return ResponseEntity.ok(ApplicationStaticData.niftyExpiryDates);
+       // ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
+        return ResponseEntity.ok(ApplicationStaticData.niftyExpiryDatesMap);
     }
 
-    @GetMapping("/getniftydata")
+    @GetMapping("/nifty/getniftydata")
     public ResponseEntity<Instrument> getOptionChainAnalysis(@RequestParam("expiryDate") String expiryDate) throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
         System.out.println(nse);
