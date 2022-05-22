@@ -10,7 +10,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-//s@Configuration
+//@Configuration
 public class CorsConfig {
 
     @Value("${app.allowed-origin}")
