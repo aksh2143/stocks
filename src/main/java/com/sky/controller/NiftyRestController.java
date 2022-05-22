@@ -24,11 +24,18 @@ public class NiftyRestController {
     @Autowired
     DataPrepareService dataPrepareService;
 
-    @GetMapping("/nifty/getniftyexpirydates")
-    public ResponseEntity<Map<String, String>> getExpiryDates() throws Exception {
-        NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
-       // ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
+    @GetMapping("/nifty/getniftyexpirydatesmap")
+    public ResponseEntity<Map<String, String>> getExpiryDatesList() throws Exception {
+     //   NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
+     //   ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
         return ResponseEntity.ok(ApplicationStaticData.niftyExpiryDatesMap);
+    }
+
+    @GetMapping("/nifty/getniftyexpirydateslist")
+    public ResponseEntity<List<String>> getExpiryDatesMap() throws Exception {
+      //  NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
+      //  ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
+        return ResponseEntity.ok(ApplicationStaticData.niftyExpiryDates);
     }
 
     @GetMapping("/nifty/getniftydata")

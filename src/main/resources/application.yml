@@ -1,0 +1,9 @@
+app:
+    allowed-origin: http://localhost:4200
+    swagger-enabled: true;
+server:
+    port: 8081
+spring:
+    jackson:
+        deserialization:
+            fail-on-unknown-properties: false
