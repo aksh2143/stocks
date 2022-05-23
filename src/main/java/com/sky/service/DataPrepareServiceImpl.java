@@ -55,6 +55,7 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             ce.setAirPercent(ceairP);
             double cechips = cedistanceFromSpot;
             ce.setChips(cechips);
+            ce.setChipsPercent(100-ce.getAirPercent());
             ce.setAir(ceair);
             if (ce.getStrikePrice() < currentStrike) {
                 ce.setItm(true);
@@ -77,6 +78,7 @@ public class DataPrepareServiceImpl implements DataPrepareService {
             pe.setAirPercent(peairP);
             pe.setChips(pechips);
             pe.setAir(peair);
+            pe.setChipsPercent(100-pe.getAirPercent());
             if (pe.getStrikePrice() < currentStrike) {
                 pe.setOtm(true);
                 pe.setPlace("OTM");
