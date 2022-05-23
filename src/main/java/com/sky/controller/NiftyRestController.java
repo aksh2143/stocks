@@ -50,7 +50,7 @@ public class NiftyRestController {
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date: "+expiryDate);
 
-        return ResponseEntity.ok(dataPrepareService.prepareInstrumentData(nse, 50, 200, false, expiryDate));
+        return ResponseEntity.ok(dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate));
     }
 
     @GetMapping("/nifty/getniftydatalist")
@@ -62,7 +62,7 @@ public class NiftyRestController {
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date: "+expiryDate);
 
-        Instrument i = dataPrepareService.prepareInstrumentData(nse, 50, 200, false, expiryDate);
+        Instrument i = dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate);
         List<Instrument> il = new ArrayList<>(); il.add(i);
         return ResponseEntity.ok(il);
     }
