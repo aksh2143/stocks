@@ -44,7 +44,6 @@ public class NiftyRestController {
     @GetMapping("/nifty/getniftydata")
     public ResponseEntity<Instrument> getOptionChainAnalysis(@RequestParam("expiryDate") String expiryDate) throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
-        System.out.println(nse);
         ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
 
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
@@ -56,7 +55,6 @@ public class NiftyRestController {
     @GetMapping("/nifty/getniftydatalist")
     public ResponseEntity<List<Instrument>> getOptionChainAnalysisList(@RequestParam("expiryDate") String expiryDate) throws Exception {
         NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
-        System.out.println(nse);
         ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
 
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
