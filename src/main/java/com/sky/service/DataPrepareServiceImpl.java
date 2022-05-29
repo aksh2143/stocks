@@ -34,6 +34,7 @@ public class DataPrepareServiceImpl implements DataPrepareService {
         }
 
         Data firstData = records.get(0);
+
         expiry = firstData.getExpiryDate();
 
         List<Strike> strikeList = new ArrayList<>();
@@ -48,48 +49,53 @@ public class DataPrepareServiceImpl implements DataPrepareService {
 
         for (Strike strike : strikeList) {
             CE ce = strike.getCe();
-            double cedistanceFromSpot = currentStrike - ce.getStrikePrice();
-            if (cedistanceFromSpot <= 0) cedistanceFromSpot = 0;
-            double ceair = ce.getLastPrice() - cedistanceFromSpot;
-            double ceairP = (ceair * 100) / ce.getLastPrice();
-            ce.setAirPercent(ceairP);
-            double cechips = cedistanceFromSpot;
-            ce.setChips(cechips);
-            ce.setChipsPercent(100-ce.getAirPercent());
-            ce.setAir(ceair);
-            if (ce.getStrikePrice() < currentStrike) {
-                ce.setItm(true);
-                ce.setPlace("ITM");
-            } else if (ce.getStrikePrice() == currentStrike) {
-                ce.setAtm(true);
-                ce.setPlace("ATM");
-            } else {
-                ce.setOtm(true);
-                ce.setPlace("OTM");
+
+            if(ce != null) {
+                double cedistanceFromSpot = currentStrike - ce.getStrikePrice();
+                if (cedistanceFromSpot <= 0) cedistanceFromSpot = 0;
+                double ceair = ce.getLastPrice() - cedistanceFromSpot;
+                double ceairP = (ceair * 100) / ce.getLastPrice();
+                ce.setAirPercent(ceairP);
+                double cechips = cedistanceFromSpot;
+                ce.setChips(cechips);
+                ce.setChipsPercent(100 - ce.getAirPercent());
+                ce.setAir(ceair);
+                if (ce.getStrikePrice() < currentStrike) {
+                    ce.setItm(true);
+                    ce.setPlace("ITM");
+                } else if (ce.getStrikePrice() == currentStrike) {
+                    ce.setAtm(true);
+                    ce.setPlace("ATM");
+                } else {
+                    ce.setOtm(true);
+                    ce.setPlace("OTM");
+                }
+                strike.setCe(ce);
             }
-            strike.setCe(ce);
 
             PE pe = strike.getPe();
-            double pedistanceFromSpot = currentStrike - pe.getStrikePrice();
-            if (pedistanceFromSpot > 0) pedistanceFromSpot = 0;
-            double peair = pe.getLastPrice() + pedistanceFromSpot;
-            double pechips = Math.abs(pedistanceFromSpot);
-            double peairP = (peair * 100) / pe.getLastPrice();
-            pe.setAirPercent(peairP);
-            pe.setChips(pechips);
-            pe.setAir(peair);
-            pe.setChipsPercent(100-pe.getAirPercent());
-            if (pe.getStrikePrice() < currentStrike) {
-                pe.setOtm(true);
-                pe.setPlace("OTM");
-            } else if (ce.getStrikePrice() == currentStrike) {
-                pe.setAtm(true);
-                pe.setPlace("ATM");
-            } else {
-                ce.setItm(true);
-                pe.setPlace("ITM");
+            if(pe != null){
+                double pedistanceFromSpot = currentStrike - pe.getStrikePrice();
+                if (pedistanceFromSpot > 0) pedistanceFromSpot = 0;
+                double peair = pe.getLastPrice() + pedistanceFromSpot;
+                double pechips = Math.abs(pedistanceFromSpot);
+                double peairP = (peair * 100) / pe.getLastPrice();
+                pe.setAirPercent(peairP);
+                pe.setChips(pechips);
+                pe.setAir(peair);
+                pe.setChipsPercent(100-pe.getAirPercent());
+                if (pe.getStrikePrice() < currentStrike) {
+                    pe.setOtm(true);
+                    pe.setPlace("OTM");
+                } else if (pe.getStrikePrice() == currentStrike) {
+                    pe.setAtm(true);
+                    pe.setPlace("ATM");
+                } else {
+                    pe.setItm(true);
+                    pe.setPlace("ITM");
+                }
+                strike.setPe(pe);
             }
-            strike.setPe(pe);
         }
 
         OptionChain optionChain = OptionChain.builder()
@@ -98,7 +104,7 @@ public class DataPrepareServiceImpl implements DataPrepareService {
                 .build();
 
         Instrument instrument = Instrument.builder()
-                .symbol(firstData.getCe().getUnderlying())
+                .symbol(firstData.getCe() != null ? firstData.getCe().getUnderlying() : firstData.getPe() != null ? firstData.getPe().getUnderlying() : "NA" )
                 .spotValue(spotPrice)
                 .currentStrike(currentStrike)
                 .optionChain(optionChain)

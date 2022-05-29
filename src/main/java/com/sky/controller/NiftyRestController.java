@@ -22,6 +22,8 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class NiftyRestController {
 
+    public static final int niftyStrikeRange = 3000;
+
     @Autowired
     FeignClientNSENifty feignClientNSENifty;
     @Autowired
@@ -48,8 +50,8 @@ public class NiftyRestController {
 
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date: "+expiryDate);
-
-        return ResponseEntity.ok(dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate));
+Instrument instru = dataPrepareService.prepareInstrumentData(nse, 50, niftyStrikeRange, false, expiryDate);
+        return ResponseEntity.ok(instru);
     }
 
     @GetMapping("/nifty/getniftydatalist")
@@ -60,7 +62,7 @@ public class NiftyRestController {
         if (!ApplicationStaticData.niftyExpiryDates.contains(expiryDate))
             throw new Exception("Invalid Expiry Date: "+expiryDate);
 
-        Instrument i = dataPrepareService.prepareInstrumentData(nse, 50, 1000, false, expiryDate);
+        Instrument i = dataPrepareService.prepareInstrumentData(nse, 50, niftyStrikeRange, false, expiryDate);
         List<Instrument> il = new ArrayList<>(); il.add(i);
         return ResponseEntity.ok(il);
     }
