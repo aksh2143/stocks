@@ -3,6 +3,7 @@ package com.sky;
 import com.sky.entity.nse.ApplicationStaticData;
 import com.sky.entity.nse.NSE;
 import com.sky.feign.FeignBuilder;
+import com.sky.feign.FeignClientNSEBankNifty;
 import com.sky.feign.FeignClientNSENifty;
 import com.sky.utils.URLS;
 import org.apache.commons.csv.CSVFormat;
@@ -32,6 +33,9 @@ public class StocksApplication {
     @Autowired
     FeignClientNSENifty feignClientNSENifty;
 
+    @Autowired
+    FeignClientNSEBankNifty feignClientNSEBankNifty;
+
 
     @Bean
     public void loadInitData() {
@@ -51,12 +55,25 @@ public class StocksApplication {
             ApplicationStaticData.fnoStockList = fnoList;
             ApplicationStaticData.headersMap = FeignBuilder.builder();
 
+            /**
+             * Nifty
+             */
             NSE nse = feignClientNSENifty.getLiveNiftyData(FeignBuilder.builder());
             ApplicationStaticData.niftyExpiryDates = Arrays.asList(nse.getRecords().getExpiryDates());
 
             Map<String, String> hm = new LinkedHashMap<>();
             ApplicationStaticData.niftyExpiryDates.stream().forEach(expiry -> hm.put(expiry, expiry));
             ApplicationStaticData.niftyExpiryDatesMap = hm;
+
+            /**
+             * Bank Nifty
+             */
+            NSE bnfNse = feignClientNSEBankNifty.getLiveBankNiftyData(FeignBuilder.builder());
+            ApplicationStaticData.bnfExpiryDates = Arrays.asList(bnfNse.getRecords().getExpiryDates());
+
+            Map<String, String> hmbnf = new LinkedHashMap<>();
+            ApplicationStaticData.bnfExpiryDates.stream().forEach(expiry -> hmbnf.put(expiry, expiry));
+            ApplicationStaticData.bnfExpiryDatesMap = hmbnf;
 
         } catch (Exception e) {
             e.printStackTrace();
